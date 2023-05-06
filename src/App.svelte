@@ -29,7 +29,7 @@
 </script>
 
 <!-- Navbar -->
-<nav class="bg-purple-500 sm:self-center justify-content-center h-20">
+<nav class="bg-purple-500 sm:self-center justify-content-center ">
   <div class="container mx-auto flex items-center justify-between ">
     <div>
       <img
@@ -99,7 +99,7 @@
   <div class={`sm:hidden bg-purple-500 px-4 pt-2 pb-3 ${ isMobileMenuOpen ? 'block' : 'hidden'}`}>
   {#if isMobileMenuOpen}
 
-    <ul class="text-white font-extrabold text-3xl">
+    <ul class="text-white font-extrabold text-3xl p-3">
       <li class="block mb-2">
         <a href="/" on:click={toggleMobileMenu}>ABOUT</a>
       </li>
@@ -136,7 +136,7 @@
     <hr />
     <div class="container mx-auto px-4 " id="text">
 
-      <h4 class="text-white text-xl font-serif p-3 leading-8 py-4">
+      <h4 class="text-white text-xl font-serif p-3 leading-8 ">
         Yo, what's good peeps! Thank you for your visit to my website .My name is
         Arvind Srivastav and I'm reppin' Sultanpur, but right now I'm chillin'
         in Lucknow. I'm currently pursuing a B.Tech/B.E. in Computers from the
