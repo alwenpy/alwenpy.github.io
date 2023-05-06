@@ -1,5 +1,6 @@
 <script>
   import AOS from "aos";
+  import { onMount } from 'svelte';
   import "aos/dist/aos.css";
   let name = "</ARVIND SRIVASTAV>";
   let about = "</ABOUT ME>";
@@ -8,106 +9,134 @@
   let Matric = "</matric>";
 
   AOS.init();
+  let isMobileMenuOpen = false;
+
+  function toggleMobileMenu() {
+    isMobileMenuOpen = !isMobileMenuOpen;
+  }
+
+  
+  let screenSize;
+
+  const updateScreenSize = () => {
+    screenSize = window.innerWidth < 768 ? 'mobile' : 'desktop';
+  }
+
+  onMount(() => {
+    updateScreenSize();
+    window.addEventListener('resize', updateScreenSize);
+  });
 </script>
 
 <!-- Navbar -->
-
-<nav class="hover:shadow-lg bg-purple-500">
-  <div class="container mx-auto">
-    <div class="flex">
-      <!-- svelte-ignore a11y-missing-attribute -->
+<nav class="bg-purple-500 sm:self-center justify-content-center h-20">
+  <div class="container mx-auto flex items-center justify-between ">
+    <div>
       <img
-        class="w-20 h-20 rounded-full sm:self-center justify-content-center"
+        class="w-20 h-20 rounded-full"
         src="https://avatars.githubusercontent.com/u/94129388?v=4"
-      />
-      <h5 class="text-white text-4xl font-bold p-3">
-        <hr />
-        {name}
-        <hr />
-      </h5>
-
-      <div
-        data-aos="zoom-in"
-        class="sm:flex mx-1 margin-left-44"
-        style="margin-left: 16rem"
-      >
-        <ul
-          class="text-white font-extrabold sm:self-center text-3xl border-t sm:border-none justify-content-start"
-          id="navtext"
-        >
-          <div class="flex ">
-            <li
-              class="sm:inline-block flex  scale-100 hover:scale-125 ease-in duration-100"
-              data-elem="about"
-            >
-              <a href="/" class="scale-50 "> ABOUT</a>
-              <div
-                class="sm:self-center"
-                style="margin-left: 97px; margin-top: 2px"
-              />
-            </li>
-            <li
-              class="sm:inline-block scale-100 hover:scale-125 ease-in duration-100"
-              data-elem="education"
-            >
-              <a href="/" class="p-3">EDUCATION</a>
-              <div
-                class="sm:self-center"
-                style="margin-left: -21px; margin-top: -33px"
-              />
-            </li>
-            <li class="sm:inline-block scale-100 hover:scale-125 ease-in duration-100" data-elem="work">
-              <a href="/" class="p-3">WORK</a>
-              <div class="" style="margin-left: -48px; margin-top: -32px" />
-            </li>
-            <li class="sm:inline-block scale-100 hover:scale-125 ease-in duration-100" data-elem="skills">
-              <a href="/" class="p-3">SKILLS</a>
-              <div
-                class="sm:self-center"
-                style="margin-left: -75px; margin-top: -33px"
-              />
-            </li>
-            <li
-              class="sm:inline-block scale-100 hover:scale-125 ease-in duration-100"
-              data-elem="contact"
-            >
-              <a href="/" class="p-3">CONTACT</a>
-              <div
-                class="sm:self-center"
-                style="margin-left: -102px; margin-top: -33px"
-              />
-            </li>
-            <li
-              class="sm:inline-block scale-100 hover:scale-125 ease-in duration-100"
-              data-elem="contact"
-            >
-              <a href="/" class="p-3">RESUME</a>
-              <div
-                class="sm:self-center"
-                style="margin-left: -102px; margin-top: -33px"
-              />
-            </li>
-          </div>
-        </ul>
-      </div>
+       alt="githubimg">
     </div>
+    <h5 class="text-white text-4xl font-bold p-3 {screenSize === 'mobile' ? 'ml-4' : '-ml-96'}">
+      <hr />
+      {name}
+      <hr />
+    </h5>
+    <div class="sm:hidden">
+      <button
+        type="button"
+        class="text-white hover:text-gray-300 focus:outline-none"
+        on:click={toggleMobileMenu}
+      >
+        <svg
+          class="h-6 w-6 fill-current"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>Mobile menu</title>
+          <path
+            class={isMobileMenuOpen ? 'hidden' : 'block'}
+            d="M4 6h16M4 12h16M4 18h16"
+            stroke="#fff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            class={isMobileMenuOpen ? 'block' : 'hidden'}
+            d="M6 18L18 6M6 6l12 12"
+            stroke="#fff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+    <div class="hidden sm:block">
+      <ul class="text-white font-extrabold text-3xl border-t sm:border-none">
+        <li class="inline-block mr-4  scale-100 hover:scale-125 ease-in duration-100">
+          <a href="/">ABOUT</a>
+        </li>
+        <li class="inline-block mr-4  scale-100 hover:scale-125 ease-in duration-100">
+          <a href="/">EDUCATION</a>
+        </li>
+        <li class="inline-block mr-4  scale-100 hover:scale-125 ease-in duration-100">
+          <a href="/">WORK</a>
+        </li>
+        <li class="inline-block mr-4  scale-100 hover:scale-125 ease-in duration-100">
+          <a href="/">SKILLS</a>
+        </li>
+        <li class="inline-block mr-4  scale-100 hover:scale-125 ease-in duration-100">
+          <a href="/">CONTACT</a>
+        </li>
+        <li class="inline-block  scale-100 hover:scale-125 ease-in duration-100">
+          <a href="/">RESUME</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class={`sm:hidden bg-purple-500 px-4 pt-2 pb-3 ${ isMobileMenuOpen ? 'block' : 'hidden'}`}>
+  {#if isMobileMenuOpen}
+
+    <ul class="text-white font-extrabold text-3xl">
+      <li class="block mb-2">
+        <a href="/" on:click={toggleMobileMenu}>ABOUT</a>
+      </li>
+      <li class="block mb-2">
+        <a href="/" on:click={toggleMobileMenu}>EDUCATION</a>
+      </li>
+      <li class="block mb-2">
+        <a href="/" on:click={toggleMobileMenu}>WORK</a>
+      </li>
+      <li class="block mb-2">
+        <a href="/" on:click={toggleMobileMenu}>SKILLS</a>
+      </li>
+      <li class="block mb-2">
+        <a href="/" on:click={toggleMobileMenu}>CONTACT</a>
+      </li>
+      <li class="block mb-2">
+        <a href="/" on:click={toggleMobileMenu}>RESUME</a>
+      </li>
+    </ul>
+{/if}
   </div>
 </nav>
 <section>
   <div data-aos="zoom-in" class="bg-black">
     <div class="container mx-auto text-items:center">
       <h2
-        class="text-white text-4xl font-bold p-3 text-align:center ba"
+        class="text-white text-4xl font-bold p-3 text-align:center "
         style="text-align: center"
-      >
+       >
         {about}
       </h2>
     </div>
 
-    <div class="" id="text">
-      <hr />
+    <hr />
+    <div class="container mx-auto px-4 " id="text">
 
-      <h4 class="text-white text-xl font-serif p-3">
+      <h4 class="text-white text-xl font-serif p-3 leading-8 py-4">
         Yo, what's good peeps! Thank you for your visit to my website .My name is
         Arvind Srivastav and I'm reppin' Sultanpur, but right now I'm chillin'
         in Lucknow. I'm currently pursuing a B.Tech/B.E. in Computers from the
